@@ -1,3 +1,9 @@
+// Author: Shamim Bin Nur
+// Description: Rest api practice with Express JS
+// Date: 20-03-2021
+
+
+
 const students = [
     {
         name : "Shamim Bin Nur",
