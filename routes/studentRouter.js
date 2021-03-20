@@ -1,3 +1,7 @@
+// Author: Shamim Bin Nur
+// Description: Rest api practice with Express JS
+// Date: 20-03-2021
+
 //importing express for working with it
 const express = require('express');
 const students = require('../database/students');
@@ -15,10 +19,10 @@ studentRouter.get("/", (req, res)=>{
 studentRouter.get('/:id', (req, res)=> {
     //get the parameter object from client and disctructuring.
     const {id} = req.params;
-    const found = students.some((item) => item.id === id );
+    const found = students.some((student) => student.id === id );
     
     if(found){
-        res.json(students.find((item) => item.id === id ));
+        res.json(students.find((student) => student.id === id ));
     }else{
         res.status(404).json({message: "Student not found"});
     }
@@ -43,6 +47,43 @@ studentRouter.post('/', (req, res) => {
     students.push(data);
     res.json(students)
 })
+
+
+//dele user using delete reaquest from client
+studentRouter.put('/:id', (req, res)=> {
+    //get the parameter object from client and disctructuring.
+    const {id} = req.params;
+    const found = students.some((item) => item.id === id );
+    
+    if(found){
+        students.forEach( (student)=> {
+            if(student.id === id ){
+                student.id = id;
+                student.name = req.body.name;
+                student.program =  req.body.program;
+                student.university = req.body.university;
+            }
+        } )
+        res.json(students.find((student) => student.id == id));
+    }else{
+        res.status(404).json({message: "Student not found"});
+    } 
+})
+
+
+studentRouter.delete('/:id', (req, res)=> {
+    //get the parameter object from client and disctructuring.
+    const {id} = req.params;
+    const found = students.some((item) => item.id === id );
+    
+    if(found){
+        res.json({message: "Deleted", students: students.filter((student) => student.id != id)});
+    }else{
+        res.status(404).json({message: "Student not found"});
+    } 
+})
+
+
 
 //exporting studentRouter so that it can be imported in main app file(index.js)
 module.exports = studentRouter;
