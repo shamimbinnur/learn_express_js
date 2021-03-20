@@ -1,5 +1,5 @@
 // Author: Shamim Bin Nur
-// Discription: Rest api practice with Express JS
+// Description: Rest api practice with Express JS
 // Date: 20-03-2021
 
 
