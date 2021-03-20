@@ -25,5 +25,24 @@ studentRouter.get('/:id', (req, res)=> {
     
 })
 
+// add new student using post reaquest from client
+studentRouter.post('/', (req, res) => {
+    const {id, name, program, university } = req.body;
+
+    if(!id || !name || !program || !university){
+        console.log(id)
+        return res.status(400).json({message: "Please provide all informations"})
+    }
+
+    const data = {
+        id,
+        name,
+        program,
+        university
+    }
+    students.push(data);
+    res.json(students)
+})
+
 //exporting studentRouter so that it can be imported in main app file(index.js)
 module.exports = studentRouter;

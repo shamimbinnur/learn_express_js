@@ -21,6 +21,10 @@ const studentRouter = require('./routes/studentRouter');
 // Initializing middlewares so that it works 
 app.use(demoMiddleware,secondDemoMiddleware);
 
+//setting node built-in middleware functions to parse json data sent from cliend
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
+
 //set studentRouters
 app.use('/students',studentRouter)
 
