@@ -5,9 +5,7 @@
 
 const express = require("express");
 const app = express();
-const students = require('./database/students');
 
-//dependencies
 
 //defining port number
 const PORT = process.env.PORT || 5000
@@ -16,29 +14,15 @@ const PORT = process.env.PORT || 5000
 const demoMiddleware = require('./middlewarefunctions/demoMiddleware');
 const secondDemoMiddleware = require('./middlewarefunctions/secondDemoMiddleware');
 
+//importing routers from external file
+const studentRouter = require('./routes/studentRouter');
 
 
-// Initializing middlewares so that it works
+// Initializing middlewares so that it works 
 app.use(demoMiddleware,secondDemoMiddleware);
 
-
-
-app.get('/api/students', (req, res)=> {
-    //sending response as Json format
-    res.json(students);
-})
-app.get('/api/students/:id', (req, res)=> {
-    //get the parameter object from client and disctructuring.
-    const {id} = req.params;
-    const found = students.some((item) => item.id === id );
-    
-    if(found){
-        res.json(students.find((item) => item.id === id ));
-    }else{
-        res.status(404).json({message: "Student not found"});
-    }
-    
-})
+//set studentRouters
+app.use('/students',studentRouter)
 
 
 app.listen(PORT, ()=> {
