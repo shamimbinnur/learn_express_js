@@ -19,7 +19,7 @@ const secondDemoMiddleware = require('./middlewarefunctions/secondDemoMiddleware
 
 
 // Initializing middlewares so that it works
-app.use(secondDemoMiddleware,demoMiddleware);
+app.use(demoMiddleware,secondDemoMiddleware);
 
 
 
@@ -27,6 +27,19 @@ app.get('/api/students', (req, res)=> {
     //sending response as Json format
     res.json(students);
 })
+app.get('/api/students/:id', (req, res)=> {
+    //get the parameter object from client and disctructuring.
+    const {id} = req.params;
+    const found = students.some((item) => item.id === id );
+    
+    if(found){
+        res.json(students.find((item) => item.id === id ));
+    }else{
+        res.status(404).json({message: "Student not found"});
+    }
+    
+})
+
 
 app.listen(PORT, ()=> {
     console.log(`Server running on port: ${PORT}`)
