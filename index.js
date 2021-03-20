@@ -17,8 +17,17 @@ const demoMiddleware = (req, res, next) => {
     next();
 }
 
+//creating another middleware function that will run after first middleware(demoMiddleware) function executed
+const secondDemoMiddleware = (req, res, next) => {
+    console.log("Second demo middleware function run!");
+    next();
+}
+
+
+
+
 // Initializing middleware so that it works
-app.use(demoMiddleware);
+app.use(demoMiddleware,secondDemoMiddleware);
 
 
 
