@@ -12,7 +12,7 @@ studentRouter.get("/", (req, res)=>{
 })
 
 //get individual student
-studentRouter.get('/students/:id', (req, res)=> {
+studentRouter.get('/:id', (req, res)=> {
     //get the parameter object from client and disctructuring.
     const {id} = req.params;
     const found = students.some((item) => item.id === id );
@@ -25,5 +25,5 @@ studentRouter.get('/students/:id', (req, res)=> {
     
 })
 
-//exporting studentRouter so that it can be import in main app file(index.js)
+//exporting studentRouter so that it can be imported in main app file(index.js)
 module.exports = studentRouter;
